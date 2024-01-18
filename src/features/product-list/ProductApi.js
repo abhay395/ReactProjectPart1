@@ -7,6 +7,22 @@ export function featchAllProducts() {
     resolve({ data });
   });
 }
+export function featchCategories() {
+  return new Promise(async (resolve) => {
+    //TODO:we will not head-code server URL here
+    const response = await fetch("http://localhost:8080/categorys");
+    const data = await response.json();
+    resolve({ data });
+  });
+}
+export function featchBrands() {
+  return new Promise(async (resolve) => {
+    //TODO:we will not head-code server URL here
+    const response = await fetch("http://localhost:8080/brands");
+    const data = await response.json();
+    resolve({ data });
+  });
+}
 export function featchAllProductByFilter(filter, sort,pagination) {
   // filter = {"category":["smartphone","laptops"]}
   // sort = {_sort:"price",_order="desc"}

@@ -20,7 +20,7 @@
             ]
         },
         {
-            "id": 2,    
+            "id": 2,
             "title": "iPhone X",
             "description": "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...",
             "price": 899,
@@ -1839,5 +1839,197 @@
                 "https://cdn.dummyjson.com/product-images/100/thumbnail.jpg"
             ]
         }
-    ]
+    ],
+    "brands": [
+        {
+            "value": "Apple",
+            "label": "Apple"
+        },
+        {
+            "value": "Samsung",
+            "label": "Samsung"
+        },
+        {
+            "value": "OPPO",
+            "label": "OPPO"
+        },
+        {
+            "value": "Huawei",
+            "label": "Huawei"
+        },
+        {
+            "value": "Microsoft Surface",
+            "label": "Microsoft Surface"
+        },
+        {
+            "value": "Infinix",
+            "label": "Infinix"
+        },
+        {
+            "value": "HP Pavilion",
+            "label": "HP Pavilion"
+        },
+        {
+            "value": "Impression of Acqua Di Gio",
+            "label": "Impression of Acqua Di Gio"
+        },
+        {
+            "value": "Royal_Mirage",
+            "label": "Royal_Mirage"
+        },
+        {
+            "value": "Fog Scent Xpressio",
+            "label": "Fog Scent Xpressio"
+        },
+        {
+            "value": "Al Munakh",
+            "label": "Al Munakh"
+        },
+        {
+            "value": "Lord - Al-Rehab",
+            "label": "Lord   Al Rehab"
+        },
+        {
+            "value": "L'Oreal Paris",
+            "label": "L'Oreal Paris"
+        },
+        {
+            "value": "Hemani Tea",
+            "label": "Hemani Tea"
+        },
+        {
+            "value": "Dermive",
+            "label": "Dermive"
+        },
+        {
+            "value": "ROREC White Rice",
+            "label": "ROREC White Rice"
+        },
+        {
+            "value": "Fair & Clear",
+            "label": "Fair & Clear"
+        },
+        {
+            "value": "Saaf & Khaas",
+            "label": "Saaf & Khaas"
+        },
+        {
+            "value": "Bake Parlor Big",
+            "label": "Bake Parlor Big"
+        },
+        {
+            "value": "Baking Food Items",
+            "label": "Baking Food Items"
+        },
+        {
+            "value": "fauji",
+            "label": "fauji"
+        },
+        {
+            "value": "Dry Rose",
+            "label": "Dry Rose"
+        },
+        {
+            "value": "Boho Decor",
+            "label": "Boho Decor"
+        },
+        {
+            "value": "Flying Wooden",
+            "label": "Flying Wooden"
+        },
+        {
+            "value": "LED Lights",
+            "label": "LED Lights"
+        },
+        {
+            "value": "luxury palace",
+            "label": "luxury palace"
+        },
+        {
+            "value": "Golden",
+            "label": "Golden"
+        }
+    ],
+    "categorys":[
+        {
+          "value": "smartphones",
+          "label": "smartphones"
+        },
+        {
+          "value": "laptops",
+          "label": "laptops"
+        },
+        {
+          "value": "fragrances",
+          "label": "fragrances"
+        },
+        {
+          "value": "skincare",
+          "label": "skincare"
+        },
+        {
+          "value": "groceries",
+          "label": "groceries"
+        },
+        {
+          "value": "home-decoration",
+          "label": "home-decoration"
+        },
+        {
+          "value": "furniture",
+          "label": "furniture"
+        },
+        {
+          "value": "tops",
+          "label": "tops"
+        },
+        {
+          "value": "womens-dresses",
+          "label": "womens-dresses"
+        },
+        {
+          "value": "womens-shoes",
+          "label": "womens-shoes"
+        },
+        {
+          "value": "mens-shirts",
+          "label": "mens-shirts"
+        },
+        {
+          "value": "mens-shoes",
+          "label": "mens-shoes"
+        },
+        {
+          "value": "mens-watches",
+          "label": "mens-watches"
+        },
+        {
+          "value": "womens-watches",
+          "label": "womens-watches"
+        },
+        {
+          "value": "womens-bags",
+          "label": "womens-bags"
+        },
+        {
+          "value": "womens-jewellery",
+          "label": "womens-jewellery"
+        },
+        {
+          "value": "sunglasses",
+          "label": "sunglasses"
+        },
+        {
+          "value": "automotive",
+          "label": "automotive"
+        },
+        {
+          "value": "motorcycle",
+          "label": "motorcycle"
+        },
+        {
+          "value": "lighting",
+          "label": "lighting"
+        }
+      ]
 }

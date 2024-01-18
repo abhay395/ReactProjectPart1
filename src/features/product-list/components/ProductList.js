@@ -3,7 +3,11 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   featchAllProductAsync,
   featchAllProductByFilterAsync,
+  featchBrandAsync,
+  featchCategoriesAsync,
   SelectAllProducts,
+  SelectBrands,
+  SelectCategories,
   SelectTotalItems,
 } from "../ProductSlice";
 import { Fragment, useEffect } from "react";
@@ -22,83 +26,9 @@ import {
 import Skeleton from "@mui/material/Skeleton";
 import Box from "@mui/material/Box";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
+import { featchBrands, featchCategories } from "../ProductApi";
 
-const sortOptions = [
-  { name: "Best Rating", sort: "rating", order: "desc", current: false },
-  { name: "Price: Low to High", sort: "price", order: "asc", current: false },
-  { name: "Price: High to Low", sort: "price", order: "desc", current: false },
-];
-const subCategories = [
-  { name: "Totes", href: "#" },
-  { name: "Backpacks", href: "#" },
-  { name: "Travel Bags", href: "#" },
-  { name: "Hip Bags", href: "#" },
-  { name: "Laptop Sleeves", href: "#" },
-];
-const filters = [
-  {
-    id: "category",
-    name: "Category",
-    options: [
-      { value: 'smartphones', label: 'smartphones' },
-  { value: 'laptops', label: 'laptops' },
-  { value: 'fragrances', label: 'fragrances' },
-  { value: 'skincare', label: 'skincare' },
-  { value: 'groceries', label: 'groceries' },
-  { value: 'home-decoration', label: 'home-decoration' },
-  { value: 'furniture', label: 'furniture' },
-  { value: 'tops', label: 'tops' },
-  { value: 'womens-dresses', label: 'womens-dresses' },
-  { value: 'womens-shoes', label: 'womens-shoes' },
-  { value: 'mens-shirts', label: 'mens-shirts' },
-  { value: 'mens-shoes', label: 'mens-shoes' },
-  { value: 'mens-watches', label: 'mens-watches' },
-  { value: 'womens-watches', label: 'womens-watches' },
-  { value: 'womens-bags', label: 'womens-bags' },
-  { value: 'womens-jewellery', label: 'womens-jewellery' },
-  { value: 'sunglasses', label: 'sunglasses' },
-  { value: 'automotive', label: 'automotive' },
-  { value: 'motorcycle', label: 'motorcycle' },
-  { value: 'lighting', label: 'lighting' }
-    ],
-  },
-  {
-    id: "brand",
-    name: "brand",
-    options: [
-      { value: "Apple", label: "Apple" },
-      { value: "Samsung", label: "Samsung" },
-      { value: "OPPO", label: "OPPO" },
-      { value: "Huawei", label: "Huawei" },
-      { value: "Microsoft Surface", label: "Microsoft Surface" },
-      { value: "Infinix", label: "Infinix" },
-      { value: "HP Pavilion", label: "HP Pavilion" },
-      {
-        value: "Impression of Acqua Di Gio",
-        label: "Impression of Acqua Di Gio",
-      },
-      { value: "Royal_Mirage", label: "Royal_Mirage" },
-      { value: "Fog Scent Xpressio", label: "Fog Scent Xpressio" },
-      { value: "Al Munakh", label: "Al Munakh" },
-      { value: "Lord - Al-Rehab", label: "Lord   Al Rehab" },
-      { value: "L'Oreal Paris", label: "L'Oreal Paris" },
-      { value: "Hemani Tea", label: "Hemani Tea" },
-      { value: "Dermive", label: "Dermive" },
-      { value: "ROREC White Rice", label: "ROREC White Rice" },
-      { value: "Fair & Clear", label: "Fair & Clear" },
-      { value: "Saaf & Khaas", label: "Saaf & Khaas" },
-      { value: "Bake Parlor Big", label: "Bake Parlor Big" },
-      { value: "Baking Food Items", label: "Baking Food Items" },
-      { value: "fauji", label: "fauji" },
-      { value: "Dry Rose", label: "Dry Rose" },
-      { value: "Boho Decor", label: "Boho Decor" },
-      { value: "Flying Wooden", label: "Flying Wooden" },
-      { value: "LED Lights", label: "LED Lights" },
-      { value: "luxury palace", label: "luxury palace" },
-      { value: "Golden", label: "Golden" },
-    ],
-  },
-];
+
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -106,17 +36,41 @@ function classNames(...classes) {
 
 export default function ProductList() {
   // const count = useSelector(SelectAllProducts);
+
   const dispatch = useDispatch();
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+//*useSeltector use 
   const products = useSelector(SelectAllProducts);
+  const categorys = useSelector(SelectCategories);
+  const brands = useSelector(SelectBrands);
   const totalItems = useSelector(SelectTotalItems);
-  // console.log(products)
+//*useSeltector use 
 
   const [filter, setFilter] = useState({});
   const [sort, setSort] = useState({});
   const [page, setpage] = useState(1);
+  // console.log(brands,categorys)
+  //*Filter and Sort 
+  const filters = [
+    {
+      id: "category",
+      name: "Category",
+      options: categorys,
+    },
+    {
+      id: "brand",
+      name: "brand",
+      options: brands,
+    },
+  ];
+  const sortOptions = [
+    { name: "Best Rating", sort: "rating", order: "desc", current: false },
+    { name: "Price: Low to High", sort: "price", order: "asc", current: false },
+    { name: "Price: High to Low", sort: "price", order: "desc", current: false },
+  ];
+  //*Filter and Sort 
 
-  // TODO handelFilter Start
+  // TODO: HANDLEARS 
 
   const handlefilter = (e, section, option) => {
     // // console.log(section.id,option.value)
@@ -139,25 +93,17 @@ export default function ProductList() {
     // // dispatch(featchAllProductByFilterAsync(newFilter))
     // console.log(e.currentTarget.checked)
   };
-  // TODO handelFilter END
-
-  // TODO handelSort START
   const handelSort = (e, option) => {
     const newSort = { _sort: option.sort, _order: option.order };
     // // console.log(e.checked)
     setSort(newSort);
     // // dispatch(featchAllProductByFilterAsync(newFilter))
   };
-
-  // TODO handelSort END
-
   const handelPage = (page) => {
     setpage(page);
     // // console.log(page)
   };
-  useEffect(()=>{
-    setpage(1)
-  },[sort,totalItems])
+  // TODO: HANDLEARS 
 
   //!HELPFULL FOR MY PROJECT BY CHATGPT
   const fetchAllProductsMemoized = useCallback(() => {
@@ -169,23 +115,32 @@ export default function ProductList() {
     fetchAllProductsMemoized();
   }, [fetchAllProductsMemoized, filter, sort]);
   //!HELPFULL FOR MY PROJECT BY CHATGPT
+  useEffect(() => {
+    dispatch(featchBrandAsync({}));
+    dispatch(featchCategoriesAsync({}));
+  }, []);
+  useEffect(() => {
+    setpage(1);
+  }, [sort, totalItems]);
 
   return (
     <div className="bg-[#1a202c] h-[100%] min-h-[1000px]">
       <div>
-        {/*TODO Mobile filter dialog */}
+        {/*//TODO: Mobile filter dialog */}
         <MobailFilters
           mobileFiltersOpen={mobileFiltersOpen}
           setMobileFiltersOpen={setMobileFiltersOpen}
           handlefilter={handlefilter}
+          filters={filters}
         />
-        {/*TODO MOBAIL Filter End */}
+        {/*//TODO: MOBAIL Filter End */}
+
         <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex items-baseline justify-between border-b border-gray-900 pb-6 pt-24">
             <h1 className="text-4xl font-bold tracking-tight text-[#d2d6dc]">
               Products
             </h1>
-
+            {/* //TODO :SORTING  START */}
             <div className="flex items-center">
               <Menu as="div" className="relative inline-block text-left">
                 <div>
@@ -249,6 +204,8 @@ export default function ProductList() {
                 <FunnelIcon className="h-5 w-5" aria-hidden="true" />
               </button>
             </div>
+            {/* //TODO :SORTING  START */}
+
           </div>
           <section aria-labelledby="products-heading" className="pb-24 pt-6">
             <h2 id="products-heading" className="sr-only">
@@ -256,7 +213,7 @@ export default function ProductList() {
             </h2>
 
             <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
-              {/* Filters */}
+              {/* //TODO: Start DESKTOP Filters */}
               <form className="hidden lg:block">
                 <h3 className="sr-only">Categories</h3>
                 {filters.map((section) => (
@@ -320,22 +277,29 @@ export default function ProductList() {
                   </Disclosure>
                 ))}
               </form>
+              {/* //TODO: END DESKTOP Filters */}
 
-              {/* Product grid  START */}
+
+
+              {/* // ? Product grid  START */}
               <div className="lg:col-span-3 col-span-1 flex flex-wrap ">
-                {/* PRODUCT START*/}
+
+
+                {/* //TODO: PRODUCT START*/}
                 <ProductGrid products={products} />
-                {/* PRODUCT END */}
-                {/* PAGINATION START */}
+                {/* //TODO: PRODUCT END */}
+
+                {/*//TODO: PAGINATION START */}
                 <Pagination
                   handelPage={handelPage}
                   page={page}
                   setpage={setpage}
                   totaItems={totalItems}
                 />
-                {/* PAGINATION END*/}
+                {/*//TODO: PAGINATION END*/}
+
               </div>
-              {/* Product grid END */}
+              {/* // ? Product grid END */}
             </div>
           </section>
         </main>
@@ -517,6 +481,7 @@ function MobailFilters({
   mobileFiltersOpen,
   setMobileFiltersOpen,
   handlefilter,
+  filters,
 }) {
   return (
     <Transition.Root show={mobileFiltersOpen} as={Fragment}>
