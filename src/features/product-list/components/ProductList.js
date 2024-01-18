@@ -413,7 +413,7 @@ function ProductGrid({ products }) {
         <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
           {products ? (
             products.map((product) => (
-              <Link to={`/product-detail`} key={product.id}>
+              <Link to={`/product-detail/${product.id}`} key={product.id}>
                 <div class="relative overflow-hidden bg-white shadow rounded-xl  dark:bg-gray-700">
                   <div class="relative overflow-hidden">
                     <div class="mb-5 overflow-hidden">

@@ -1,43 +1,39 @@
 import { FiChevronRight, FiChevronLeft } from "react-icons/fi";
 import Navbar from "../../navbar/Navbar";
+import { useParams } from 'react-router-dom';
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { SelectSingelProduct, featchSingelProductAsync } from "../ProductSlice";
 
 
 function ProductDetail() {
-    const filterProduct =  {
-        "id": 1,
-        "title": "iPhone 9",
-        "description": "An apple mobile which is nothing like apple",
-        "price": 549,
-        "discountPercentage": 12.96,
-        "rating": 4.69,
-        "stock": 94,
-        "brand": "Apple",
-        "category": "smartphones",
-        "thumbnail": "https://cdn.dummyjson.com/product-images/1/thumbnail.jpg",
-        "images": [
-          "https://cdn.dummyjson.com/product-images/1/1.jpg",
-          "https://cdn.dummyjson.com/product-images/1/2.jpg",
-          "https://cdn.dummyjson.com/product-images/1/3.jpg",
-          "https://cdn.dummyjson.com/product-images/1/4.jpg",
-          "https://cdn.dummyjson.com/product-images/1/thumbnail.jpg"
-        ]
-      }
-    return ( <div>
-      
-         <div
+  const filterProduct = useSelector(SelectSingelProduct)
+  // console.log(filterProduct.length,'kk')
+  const { id } = useParams();
+  // // console.log(id)
+  // Array.l
+  const dispatch = useDispatch()
+  useEffect(()=>{
+    dispatch(featchSingelProductAsync({id}))
+  },[dispatch,id])
+
+ if(filterProduct.length!=0) return (
+    <div>
+      <Navbar/>
+      <div
         id="CategoryItems"
         className="2xl:container 2xl:mx-auto text-gray-[#424242] min-h-screen  bg-[#3c546c] lg:py-16 lg:px-20 md:py-12 md:px-6 py-9 px-4 "
       >
         <div className="flex justify-center items-center lg:flex-row flex-col-reverse gap-8">
           {/* <!-- Description Div --> */}
-  
+
           <div className="  w-full sm:w-96 md:w-8/12 lg:w-6/12 items-center">
             <h2 className="font-semibold lg:text-4xl text-3xl lg:leading-9 leading-7 text-gray-[#424242] 800 mt-4">
-              {filterProduct.title}
+              {filterProduct[0].title}
             </h2>
-  
-            <div className=" flex flex-row justify-between  mt-5">
-              <div className=" flex flex-row space-x-3">
+
+            <div className=" flex flex-row justify-between items-baseline  mt-5">
+              <div className=" flex flex-row items-center space-x-3">
                 <svg
                   className=" cursor-pointer"
                   width="20"
@@ -103,55 +99,61 @@ function ProductDetail() {
                     fill="#1F2937"
                   />
                 </svg>
+              <p className="text-[19px] text-gray-900 " >{filterProduct[0].rating}</p>
               </div>
             </div>
-  
+
             <p className=" font-normal text-base leading-6 text-gray-[#424242] 600 mt-7">
-              {filterProduct.description}
+              {filterProduct[0].description}
             </p>
             <p className=" font-semibold lg:text-2xl text-xl lg:leading-6 leading-5 mt-6 ">
-              $ {filterProduct.price}
+              $ {filterProduct[0].price}
             </p>
-  
+
             <div className="lg:mt-11 mt-10">
               <div className="flex flex-row justify-between">
                 <p className=" font-medium text-base leading-4 text-gray-[#424242] 600">
                   Select quantity
                 </p>
                 <div className="flex">
-                <select name="" id="" className="rounded-md bg-gray-600 text-white w-[80px]" >
+                  <select
+                    name=""
+                    id=""
+                    className="rounded-md bg-gray-600 text-white w-[80px]"
+                  >
                     <option value="">1</option>
                     <option value="">2</option>
                     <option value="">3</option>
-                </select>
+                  </select>
                 </div>
               </div>
             </div>
-  
+
             <button
-            //   onClick={handleAddToCart}
+              //   onClick={handleAddToCart}
               className="focus:outline-none focus:ring-2 hover:bg-black focus:ring-offset-2 focus:ring-gray-800 font-medium text-base leading-4 text-white bg-gray-800 w-full py-5 lg:mt-12 mt-6"
             >
-              {/* {!activity ? "Add to shopping bag" : "Go to cart"} */}Add to shopping bag
+              {/* {!activity ? "Add to shopping bag" : "Go to cart"} */}Add to
+              shopping bag
             </button>
             {/* <ToastContainer
               position="top-center mt-[20px] z-50"
               autoClose={3000}
             /> */}
           </div>
-  
+
           {/* <!-- Preview Images Div For larger Screen--> */}
-  
+
           <div className="w-full sm:w-96 max-h-[400px] md:w-8/12 lg:w-6/12 flex lg:flex-row flex-col lg:gap-8 sm:gap-6 gap-4">
             <div className="w-full lg:w-8/12  flex justify-center items-center">
               <img
-                src={filterProduct.thumbnail}
+                src={filterProduct[0].thumbnail}
                 alt="Wooden Chair Preview"
                 className="h-full object-fill max-h-[400px]"
               />
             </div>
             <div className="w-full in lg:w-4/12 lg:grid hidden lg:grid-cols-1 sm:grid-cols-4 grid-cols-2 gap-6">
-              {filterProduct.images.slice(1, 4).map((item, index) => (
+              {filterProduct[0].images.slice(1, 4).map((item, index) => (
                 <div
                   key={index}
                   className="bg-gray-100 flex h-[177px] max-h-[117px] justify-center items-center"
@@ -166,7 +168,10 @@ function ProductDetail() {
             </div>
           </div>
         </div>
-      </div></div> );
+      </div>
+    </div>
+  );
+  return <div>Hello</div>
 }
 
 export default ProductDetail;

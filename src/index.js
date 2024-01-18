@@ -20,7 +20,7 @@ import ProductList from "./features/product-list/components/ProductList.js";
 import Home from "./Page/Home.js";
 import CartPage from "./Page/CartPage.js";
 import CheckoutPage from "./Page/CheckoutPage.js";
-import SinglProductPage from "./Page/SingleProductPage.js";
+import ProductDetail from "./Page/ProductDetailePage.js";
 // import SearchitemArea from './Header/SearchitemArea.js'
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -30,7 +30,7 @@ const router = createBrowserRouter(
       <Route path="/signup" element={<SignupPage/>} />
       <Route path="/cart" element={<CartPage/>} />
       <Route path="/checkout" element={<CheckoutPage/>} />
-      <Route path="/product-detail" element = {<SinglProductPage/>} />
+      <Route path="/product-detail/:id" element = {<ProductDetail/>} />
     </Route>
   )
 );

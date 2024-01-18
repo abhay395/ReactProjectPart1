@@ -1,11 +1,12 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { featchAllProductByFilter, featchAllProducts, featchBrands, featchCategories } from './ProductApi';
+import { featchAllProductByFilter, featchAllProducts, featchBrands, featchCategories, featchSingelProduct } from './ProductApi';
 
 const initialState = {
   products:[],
   status: 'idle',
   brands:[],
   categorys:[],
+  SingelProduct:[],
   totalItems:0
 };
 
@@ -27,6 +28,13 @@ export const featchAllProductByFilterAsync = createAsyncThunk(
   'product/featchAllProductByFilter',
   async ({filter,sort,pagination}) => {
     const response = await featchAllProductByFilter(filter,sort,pagination);
+    return response.data;
+  }
+);
+export const featchSingelProductAsync = createAsyncThunk(
+  'product/featchSingelProduct',
+  async ({id}) => {
+    const response = await featchSingelProduct(id);
     return response.data;
   }
 );
@@ -64,6 +72,13 @@ export const ProductSlice = createSlice({
         state.status = 'idle';
         state.brands=action.payload;
       })
+      .addCase(featchSingelProductAsync.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(featchSingelProductAsync.fulfilled, (state, action) => {
+        state.status = 'idle';
+        state.SingelProduct=action.payload;
+      })
   },
 });
 
@@ -72,6 +87,7 @@ export const { increment } = ProductSlice.actions;
 export const SelectAllProducts = (state) => state.product.products;
 export const SelectCategories = (state) => state.product.categorys;
 export const SelectBrands = (state) => state.product.brands;
+export const SelectSingelProduct = (state) => state.product.SingelProduct;
 export const SelectTotalItems = (state) => state.product.totalItems;
 
 export default ProductSlice.reducer;
