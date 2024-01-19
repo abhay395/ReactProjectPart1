@@ -6,6 +6,8 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import { Link, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectCartItem } from "../cart/CartSlice";
 const navigation = [];
 
 function classNames(...classes) {
@@ -14,6 +16,9 @@ function classNames(...classes) {
 
 export default function Navbar() {
   const navigate = useNavigate();
+  const Product = useSelector(selectCartItem)
+  const totalitem = Product.length
+  console.log(totalitem)
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
@@ -68,7 +73,7 @@ export default function Navbar() {
                   {/* <span className="sr-only bg-slate-400">5</span> */}
                   <ShoppingBagIcon className="h-6 w-6" aria-hidden="true" />
                   <span className="inline-flex items-center rounded-md bg-gray-50 absolute bottom-4 px-1  text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">
-                    5
+                   {totalitem}
                   </span>
                 </button>
 
