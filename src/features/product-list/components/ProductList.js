@@ -373,6 +373,7 @@ function Pagination({ handelPage, setpage, page, totaItems = 55 }) {
                   onClick={(e) => {
                     handelPage(index + 1);
                   }}
+                  key={index+1}
                   // aria-current="page"
                   className={`relative z-10  inline-flex items-center ${
                     page - 1 === index ? "bg-indigo-600" : " "

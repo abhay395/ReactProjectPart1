@@ -1,42 +1,62 @@
-// // import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-// // import { fetchCount } from './AuthApi';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { checkUser, createUser } from './AuthApi';
 
-// // const initialState = {
-// //   value: 0,
-// //   status: 'idle',
-// // };
+const initialState = {
+  loggedInUser:null,
+  status: 'idle',
+  errors:null
+};
 
-// // export const incrementAsync = createAsyncThunk(
-// //   'counter/fetchCount',
-// //   async (amount) => {
-// //     const response = await fetchCount(amount);
-// //     return response.data;
-// //   }
-// // );
+export const createUserAsync = createAsyncThunk(
+  'user/createUser',
+  async (userData) => {
+    const response = await createUser(userData);
+    return response.data;
+  }
+);
+export const checkUserAsync = createAsyncThunk(
+  'user/checkUser',
+  async (loginInfo) => {
+    const response = await checkUser(loginInfo);
+    return response.data;
+  }
+);
 
-// // export const counterSlice = createSlice({
-// //   name: 'counter',
-// //   initialState,
-// //   reducers: {
-// //     increment: (state) => {
-// //       state.value += 1;
-// //     },
-// //   },
+export const userSlice = createSlice({
+  name: 'user',
+  initialState,
+  reducers: {
+    resetError: (state) => {
+      state.errors=null
+    },
+  },
  
-// //   extraReducers: (builder) => {
-// //     builder
-// //       .addCase(incrementAsync.pending, (state) => {
-// //         state.status = 'loading';
-// //       })
-// //       .addCase(incrementAsync.fulfilled, (state, action) => {
-// //         state.status = 'idle';
-// //         state.value += action.payload;
-// //       });
-// //   },
-// // });
+  extraReducers: (builder) => {
+    builder
+      .addCase(createUserAsync.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(createUserAsync.fulfilled, (state, action) => {
+        state.status = 'idle';
+        state.loggedInUser = action.payload;
+      })
+      .addCase(checkUserAsync.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(checkUserAsync.fulfilled, (state, action) => {
+        state.status = 'idle';
+        state.loggedInUser = action.payload;
+      })
+      .addCase(checkUserAsync.rejected, (state, action) => {
+        state.status = 'idle';
+        state.errors = action.error;
+      })
+  },
+});
 
-// // export const { increment } = counterSlice.actions;
+export const {resetError} = userSlice.actions;
 
-// // export const selectCount = (state) => state.counter.value;
+export const selectLoggedInUser = (state) => state.user.loggedInUser;
+export const selectError = (state) => state.user.errors;
 
-// // export default counterSlice.reducer;
+export default userSlice.reducer;
