@@ -10,7 +10,7 @@ import { useSelector } from "react-redux";
 import { selectCartItem } from "../cart/CartSlice";
 const navigation = [];
 
-function classNames(...classes) {
+function classs(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
@@ -49,7 +49,7 @@ export default function Navbar() {
                       <a
                         key={item.name}
                         href={item.href}
-                        className={classNames(
+                        className={classs(
                           item.current
                             ? "bg-gray-900 text-white"
                             : "text-gray-300 hover:bg-gray-700 hover:text-white",
@@ -106,7 +106,7 @@ export default function Navbar() {
                             {" "}
                             <Link
                               to="#"
-                              className={classNames(
+                              className={classs(
                                 active ? "bg-gray-100" : "",
                                 "block px-4 py-2 text-sm text-gray-700"
                               )}
@@ -115,7 +115,7 @@ export default function Navbar() {
                             </Link>
                             <Link
                               to="#"
-                              className={classNames(
+                              className={classs(
                                 active ? "bg-gray-100" : "",
                                 "block px-4 py-2 text-sm text-gray-700"
                               )}
@@ -124,7 +124,7 @@ export default function Navbar() {
                             </Link>
                             <Link
                               to="/login"
-                              className={classNames(
+                              className={classs(
                                 active ? "bg-gray-100" : "",
                                 "block px-4 py-2 text-sm text-gray-700"
                               )}
@@ -148,7 +148,7 @@ export default function Navbar() {
                   key={item.name}
                   as="a"
                   href={item.href}
-                  className={classNames(
+                  className={classs(
                     item.current
                       ? "bg-gray-900 text-white"
                       : "text-gray-300 hover:bg-gray-700 hover:text-white",

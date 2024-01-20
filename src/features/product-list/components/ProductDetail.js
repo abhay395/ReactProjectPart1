@@ -23,7 +23,9 @@ function ProductDetail() {
   },[dispatch,id])
 
   const handleAddToCart = (e)=>{
-    dispatch(addToCartAsync({...product,quantity:quantity,user:user.id}))
+    const newItem = {...product,quantity:quantity,user:user.id}
+    delete newItem["id"]
+    dispatch(addToCartAsync(newItem))
   }
  if(Product.length!=0) return (
     <>
