@@ -8,21 +8,21 @@ const initialState = {
 };
 
 export const createUserAsync = createAsyncThunk(
-  'user/createUser',
+  'auth/createUser',
   async (userData) => {
     const response = await createUser(userData);
     return response.data;
   }
 );
 export const checkUserAsync = createAsyncThunk(
-  'user/checkUser',
+  'auth/checkUser',
   async (loginInfo) => {
     const response = await checkUser(loginInfo);
     return response.data;
   }
 );
 export const updateUserAsync = createAsyncThunk(
-  'user/updateUser',
+  'auth/updateUser',
   async (update) => {
     const response = await updateUser(update);
     return response.data;
@@ -70,7 +70,7 @@ export const userSlice = createSlice({
 
 export const {resetError} = userSlice.actions;
 
-export const selectLoggedInUser = (state) => state.user.loggedInUser;
-export const selectError = (state) => state.user.errors;
+export const selectLoggedInUser = (state) => state.auth.loggedInUser;
+export const selectError = (state) => state.auth.errors;
 
 export default userSlice.reducer;

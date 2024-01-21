@@ -8,7 +8,7 @@ import {
   selectCartItem,
   updateCartAsync,
 } from "../CartSlice";
-import { updateCart } from "../CartApi";
+// import { updateCart } from "../CartApi";
 
 export default function Cart() {
   // // const count = useSelector(selectCount);

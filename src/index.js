@@ -22,6 +22,10 @@ import CartPage from "./Page/CartPage.js";
 import CheckoutPage from "./Page/CheckoutPage.js";
 import ProductDetail from "./Page/ProductDetailePage.js";
 import Protected from "./features/auth/components/Protected.js";
+import PageNotFound from "./Page/404Page.js";
+import OrderSucces from "./Page/OrderSucesspage.js";
+import MyProfilepage from "./Page/MyProfilepage.js";
+import MyOrderPage from "./Page/MyOrderPage.js";
 // import SearchitemArea from './Header/SearchitemArea.js'
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -32,6 +36,10 @@ const router = createBrowserRouter(
       <Route path="/cart" element={<Protected><CartPage/></Protected>} />
       <Route path="/checkout" element={<Protected><CheckoutPage/></Protected>} />
       <Route path="/product-detail/:id" element = {<Protected><ProductDetail/></Protected>} />
+      <Route path="*" element = {<PageNotFound/>} />
+      <Route path="/orderSucces/:id" element = {<OrderSucces/>} />
+      <Route path="/myprofile" element = {<MyProfilepage/>} />
+      <Route path="/myorders" element = {<MyOrderPage/>} />
     </Route>
   )
 );
