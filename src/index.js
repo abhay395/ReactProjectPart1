@@ -26,6 +26,7 @@ import PageNotFound from "./Page/404Page.js";
 import OrderSucces from "./Page/OrderSucesspage.js";
 import MyProfilepage from "./Page/MyProfilepage.js";
 import MyOrderPage from "./Page/MyOrderPage.js";
+import Logout from "./features/auth/components/Logout.js";
 // import SearchitemArea from './Header/SearchitemArea.js'
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -37,9 +38,10 @@ const router = createBrowserRouter(
       <Route path="/checkout" element={<Protected><CheckoutPage/></Protected>} />
       <Route path="/product-detail/:id" element = {<Protected><ProductDetail/></Protected>} />
       <Route path="*" element = {<PageNotFound/>} />
-      <Route path="/orderSucces/:id" element = {<OrderSucces/>} />
-      <Route path="/myprofile" element = {<MyProfilepage/>} />
-      <Route path="/myorders" element = {<MyOrderPage/>} />
+      <Route path="/orderSucces/:id" element = {<Protected><OrderSucces/></Protected>} />
+      <Route path="/myprofile" element = {<Protected><MyProfilepage/></Protected>} />
+      <Route path="/myorders" element = {<Protected><MyOrderPage/></Protected>} />
+      <Route path="/logout" element = {<Protected><Logout/></Protected>} />
     </Route>
   )
 );

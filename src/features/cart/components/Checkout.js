@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useNavigate } from "react-router";
 import { selectCartItem, deleteItemFromCartAsync, resetCartAsync } from "../CartSlice";
 import { useForm } from "react-hook-form";
-import { selectLoggedInUser, updateUserAsync } from "../../auth/AuthSlice";
+import {  selectUserinfo, updateUserAsync } from "../../user/userSlice";
 import { useState } from "react";
 import { SelectCurrentOrder, addOrderAsync } from "../../order/OrderSlice";
 
@@ -19,7 +19,7 @@ function Checkout() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const Product = useSelector(selectCartItem);
-  const user = useSelector(selectLoggedInUser);
+  const user = useSelector(selectUserinfo);
   const currentOrder = useSelector(SelectCurrentOrder)
   const total = Product?.reduce((acu, current) => {
     return acu + current.price * current.quantity;

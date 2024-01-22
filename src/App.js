@@ -10,6 +10,7 @@ import { featchItemsByUserId } from './features/cart/CartApi';
 import { featchItemsByUserIdAsync } from './features/cart/CartSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectLoggedInUser } from './features/auth/AuthSlice';
+import { featchLoggedInUserInfoAsync } from './features/user/userSlice';
 
 function App() {
   const dispatch = useDispatch()
@@ -17,6 +18,7 @@ function App() {
   useEffect(()=>{
   if(user){
     dispatch( featchItemsByUserIdAsync(user.id))
+    dispatch(featchLoggedInUserInfoAsync(user.id));
   }
   },[dispatch,user])
   return (
