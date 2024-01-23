@@ -1,25 +1,6 @@
 {
   "products": [
     {
-      "id": 1,
-      "title": "iPhone 9",
-      "description": "An apple mobile which is nothing like apple",
-      "price": 549,
-      "discountPercentage": 12.96,
-      "rating": 4.69,
-      "stock": 94,
-      "brand": "Apple",
-      "category": "smartphones",
-      "thumbnail": "https://cdn.dummyjson.com/product-images/1/thumbnail.jpg",
-      "images": [
-        "https://cdn.dummyjson.com/product-images/1/1.jpg",
-        "https://cdn.dummyjson.com/product-images/1/2.jpg",
-        "https://cdn.dummyjson.com/product-images/1/3.jpg",
-        "https://cdn.dummyjson.com/product-images/1/4.jpg",
-        "https://cdn.dummyjson.com/product-images/1/thumbnail.jpg"
-      ]
-    },
-    {
       "id": 2,
       "title": "iPhone X",
       "description": "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...",
@@ -73,11 +54,11 @@
     },
     {
       "id": 5,
-      "title": "Huawei P30",
+      "title": "Huawei P20",
       "description": "Huawei’s re-badged P30 Pro New Edition was officially unveiled yesterday in Germany and now the device has made its way to the UK.",
       "price": 499,
       "discountPercentage": 10.58,
-      "rating": 4.09,
+      "rating": 0,
       "stock": 32,
       "brand": "Huawei",
       "category": "smartphones",
@@ -85,7 +66,8 @@
       "images": [
         "https://cdn.dummyjson.com/product-images/5/1.jpg",
         "https://cdn.dummyjson.com/product-images/5/2.jpg",
-        "https://cdn.dummyjson.com/product-images/5/3.jpg"
+        "https://cdn.dummyjson.com/product-images/5/3.jpg",
+        "https://cdn.dummyjson.com/product-images/8/4.jpg"
       ]
     },
     {
@@ -108,11 +90,11 @@
     },
     {
       "id": 7,
-      "title": "Samsung Galaxy Book",
+      "title": "Samsung Galaxy Book 4",
       "description": "Samsung Galaxy Book S (2020) Laptop With Intel Lakefield Chip, 8GB of RAM Launched",
       "price": 1499,
       "discountPercentage": 4.15,
-      "rating": 4.25,
+      "rating": 0,
       "stock": 50,
       "brand": "Samsung",
       "category": "laptops",
@@ -126,11 +108,11 @@
     },
     {
       "id": 8,
-      "title": "Microsoft Surface Laptop 4",
+      "title": "Microsoft Surface Laptop 5",
       "description": "Style and speed. Stand out on HD video calls backed by Studio Mics. Capture ideas on the vibrant touchscreen.",
       "price": 1499,
       "discountPercentage": 10.23,
-      "rating": 4.43,
+      "rating": 0,
       "stock": 68,
       "brand": "Microsoft Surface",
       "category": "laptops",
@@ -139,8 +121,7 @@
         "https://cdn.dummyjson.com/product-images/8/1.jpg",
         "https://cdn.dummyjson.com/product-images/8/2.jpg",
         "https://cdn.dummyjson.com/product-images/8/3.jpg",
-        "https://cdn.dummyjson.com/product-images/8/4.jpg",
-        "https://cdn.dummyjson.com/product-images/8/thumbnail.jpg"
+        "https://cdn.dummyjson.com/product-images/8/4.jpg"
       ]
     },
     {
@@ -164,7 +145,7 @@
     },
     {
       "id": 10,
-      "title": "HP Pavilion 15-DK1056WM",
+      "title": "HP Pavilion 15-DK1056WMAD",
       "description": "HP Pavilion 15-DK1056WM Gaming Laptop 10th Gen Core i5, 8GB, 256GB SSD, GTX 1650 4GB, Windows 10",
       "price": 1099,
       "discountPercentage": 6.18,
@@ -2037,19 +2018,49 @@
       "email": "abhayparja90@gmail.com",
       "password": "Abhay@4565",
       "id": 1,
+      "role": "user",
       "addresses": []
     },
     {
       "email": "Abhayparja90@gmail.com",
       "password": "Abhay@4545",
-      "addresses": [],
+      "addresses": [
+        {
+          "fullName": "Abhay Prajapati",
+          "email": "abhayparja90@gmail.com",
+          "phone": "9509123636",
+          "streetAddress": "gori nagar ",
+          "city": "indore",
+          "state": "Madhya pradesh",
+          "pinCode": "45001"
+        }
+      ],
+      "role": "user",
       "id": 2
     },
     {
       "email": "abhayparja47@gmail.com",
       "password": "Abhay@4141",
       "addresses": [],
+      "role": "user",
       "id": 3
+    },
+    {
+      "email": "admin@gmail.com",
+      "password": "Abhay@9313",
+      "addresses": [
+        {
+          "fullName": "Abhay Prajapati",
+          "email": "abhay4545@gmail.com",
+          "phone": "95205235",
+          "streetAddress": "tit square gori nagar",
+          "city": "indore",
+          "state": "Madhya pradesh",
+          "pinCode": "4501041"
+        }
+      ],
+      "role": "admin",
+      "id": 4
     }
   ],
   "cart": [],
@@ -2572,6 +2583,214 @@
       },
       "status": "pending",
       "id": 6
+    },
+    {
+      "items": [
+        {
+          "title": "iPhone 9",
+          "description": "An apple mobile which is nothing like apple",
+          "price": 549,
+          "discountPercentage": 12.96,
+          "rating": 4.69,
+          "stock": 94,
+          "brand": "Apple",
+          "category": "smartphones",
+          "thumbnail": "https://cdn.dummyjson.com/product-images/1/thumbnail.jpg",
+          "images": [
+            "https://cdn.dummyjson.com/product-images/1/1.jpg",
+            "https://cdn.dummyjson.com/product-images/1/2.jpg",
+            "https://cdn.dummyjson.com/product-images/1/3.jpg",
+            "https://cdn.dummyjson.com/product-images/1/4.jpg",
+            "https://cdn.dummyjson.com/product-images/1/thumbnail.jpg"
+          ],
+          "quantity": 1,
+          "user": 2,
+          "id": 1
+        },
+        {
+          "title": "OPPOF19",
+          "description": "OPPO F19 is officially announced on April 2021.",
+          "price": 280,
+          "discountPercentage": 17.91,
+          "rating": 4.3,
+          "stock": 123,
+          "brand": "OPPO",
+          "category": "smartphones",
+          "thumbnail": "https://cdn.dummyjson.com/product-images/4/thumbnail.jpg",
+          "images": [
+            "https://cdn.dummyjson.com/product-images/4/1.jpg",
+            "https://cdn.dummyjson.com/product-images/4/2.jpg",
+            "https://cdn.dummyjson.com/product-images/4/3.jpg",
+            "https://cdn.dummyjson.com/product-images/4/4.jpg",
+            "https://cdn.dummyjson.com/product-images/4/thumbnail.jpg"
+          ],
+          "quantity": 1,
+          "user": 2,
+          "id": 2
+        }
+      ],
+      "total": 829,
+      "user": {
+        "email": "Abhayparja90@gmail.com",
+        "password": "Abhay@4545",
+        "addresses": [
+          {
+            "fullName": "Abhay Prajapati",
+            "email": "abhayparja90@gmail.com",
+            "phone": "9509123636",
+            "streetAddress": "gori nagar ",
+            "city": "indore",
+            "state": "Madhya pradesh",
+            "pinCode": "45001"
+          }
+        ],
+        "role": "user",
+        "id": 2
+      },
+      "discount": 58,
+      "paymentMethode": "creadite card",
+      "selectedAddress": {
+        "fullName": "Abhay Prajapati",
+        "email": "abhayparja90@gmail.com",
+        "phone": "9509123636",
+        "streetAddress": "gori nagar ",
+        "city": "indore",
+        "state": "Madhya pradesh",
+        "pinCode": "45001"
+      },
+      "status": "pending",
+      "id": 7
+    },
+    {
+      "items": [
+        {
+          "title": "HP Pavilion 15-DK1056WM",
+          "description": "HP Pavilion 15-DK1056WM Gaming Laptop 10th Gen Core i5, 8GB, 256GB SSD, GTX 1650 4GB, Windows 10",
+          "price": 1099,
+          "discountPercentage": 6.18,
+          "rating": 4.43,
+          "stock": 89,
+          "brand": "HP Pavilion",
+          "category": "laptops",
+          "thumbnail": "https://cdn.dummyjson.com/product-images/10/thumbnail.jpeg",
+          "images": [
+            "https://cdn.dummyjson.com/product-images/10/1.jpg",
+            "https://cdn.dummyjson.com/product-images/10/2.jpg",
+            "https://cdn.dummyjson.com/product-images/10/3.jpg",
+            "https://cdn.dummyjson.com/product-images/10/thumbnail.jpeg"
+          ],
+          "quantity": 1,
+          "user": 2,
+          "id": 1
+        },
+        {
+          "title": "Infinix INBOOK",
+          "description": "Infinix Inbook X1 Ci3 10th 8GB 256GB 14 Win10 Grey – 1 Year Warranty",
+          "price": 1099,
+          "discountPercentage": 11.83,
+          "rating": 4.54,
+          "stock": 96,
+          "brand": "Infinix",
+          "category": "laptops",
+          "thumbnail": "https://cdn.dummyjson.com/product-images/9/thumbnail.jpg",
+          "images": [
+            "https://cdn.dummyjson.com/product-images/9/1.jpg",
+            "https://cdn.dummyjson.com/product-images/9/2.png",
+            "https://cdn.dummyjson.com/product-images/9/3.png",
+            "https://cdn.dummyjson.com/product-images/9/4.jpg",
+            "https://cdn.dummyjson.com/product-images/9/thumbnail.jpg"
+          ],
+          "quantity": 1,
+          "user": 2,
+          "id": 2
+        }
+      ],
+      "total": 2198,
+      "user": {
+        "email": "Abhayparja90@gmail.com",
+        "password": "Abhay@4545",
+        "addresses": [
+          {
+            "fullName": "Abhay Prajapati",
+            "email": "abhayparja90@gmail.com",
+            "phone": "9509123636",
+            "streetAddress": "gori nagar ",
+            "city": "indore",
+            "state": "Madhya pradesh",
+            "pinCode": "45001"
+          }
+        ],
+        "role": "user",
+        "id": 2
+      },
+      "discount": 271,
+      "paymentMethode": "cash",
+      "selectedAddress": {
+        "fullName": "Abhay Prajapati",
+        "email": "abhayparja90@gmail.com",
+        "phone": "9509123636",
+        "streetAddress": "gori nagar ",
+        "city": "indore",
+        "state": "Madhya pradesh",
+        "pinCode": "45001"
+      },
+      "status": "pending",
+      "id": 8
+    },
+    {
+      "items": [
+        {
+          "title": "iPhone X",
+          "description": "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...",
+          "price": 899,
+          "discountPercentage": 17.94,
+          "rating": 4.44,
+          "stock": 34,
+          "brand": "Apple",
+          "category": "smartphones",
+          "thumbnail": "https://cdn.dummyjson.com/product-images/2/thumbnail.jpg",
+          "images": [
+            "https://cdn.dummyjson.com/product-images/2/1.jpg",
+            "https://cdn.dummyjson.com/product-images/2/2.jpg",
+            "https://cdn.dummyjson.com/product-images/2/3.jpg",
+            "https://cdn.dummyjson.com/product-images/2/thumbnail.jpg"
+          ],
+          "quantity": 1,
+          "user": 4,
+          "id": 1
+        }
+      ],
+      "total": 899,
+      "user": {
+        "email": "admin@gmail.com",
+        "password": "Abhay@9313",
+        "addresses": [
+          {
+            "fullName": "Abhay Prajapati",
+            "email": "abhay4545@gmail.com",
+            "phone": "95205235",
+            "streetAddress": "tit square gori nagar",
+            "city": "indore",
+            "state": "Madhya pradesh",
+            "pinCode": "4501041"
+          }
+        ],
+        "role": "admin",
+        "id": 4
+      },
+      "discount": 50,
+      "paymentMethode": "creadite card",
+      "selectedAddress": {
+        "fullName": "Abhay Prajapati",
+        "email": "abhay4545@gmail.com",
+        "phone": "95205235",
+        "streetAddress": "tit square gori nagar",
+        "city": "indore",
+        "state": "Madhya pradesh",
+        "pinCode": "4501041"
+      },
+      "status": "pending",
+      "id": 9
     }
   ]
 }

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Navbar from "../features/navbar/Navbar";
 import ProductList from "../features/product-list/components/ProductList";
 function Home() {
@@ -6,7 +7,6 @@ function Home() {
      
      <div className="sticky top-0 z-50" ><Navbar/></div>
       {/* </div> */}
-
       <ProductList />
     </div>
   );

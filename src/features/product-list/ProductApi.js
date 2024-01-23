@@ -32,7 +32,20 @@ export function featchSingelProduct(id) {
     resolve({ data });
   });
 }
-export function featchAllProductByFilter(filter, sort,pagination) {
+export function createProduct(addData) {
+  // console.log(id)
+  return new Promise(async (resolve) => {
+    //TODO:we will not head-code server URL here
+    const response = await fetch(`http://localhost:8080/products`,{
+      method: "POST",
+      body: JSON.stringify(addData),
+      headers: { "content-type": "application/json" }
+    });
+    const data = await response.json();
+    resolve({ data });
+  });
+}
+export function featchAllProductByFilter(filter,sort,pagination) {
   // filter = {"category":["smartphone","laptops"]}
   // sort = {_sort:"price",_order="desc"}
   // pagination= {_page:1,_limit:10}
@@ -72,4 +85,26 @@ export function featchAllProductByFilter(filter, sort,pagination) {
     const totalItems = await response.headers.get('X-Total-Count')
     resolve({ data:{products:data,totalItems:+totalItems} });
   });
+}
+export function updateProduct(updateproductData,id){
+  return new Promise(async (resolve) => {
+    const response = await fetch("http://localhost:8080/products/"+id, {
+      method: "PATCH",
+      body: JSON.stringify(updateproductData),
+      headers: { "content-type": "application/json" },
+    });
+    console.log(id,updateproductData)
+    const data = await response.json();
+    // TODO: on Server it will only  return some infor of user (not password)
+    resolve({ data });
+  });
+}
+export function deleteProduct(productId){
+  return new Promise (async(resolve)=>{
+    const response = await fetch('http://localhost:8080/products/'+productId,{
+      method:"DELETE"
+    })
+    const data = await response.json()
+    resolve({data:{ id: productId }})
+  })
 }

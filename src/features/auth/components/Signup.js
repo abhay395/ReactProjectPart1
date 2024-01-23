@@ -1,8 +1,8 @@
 import { Link, Navigate } from "react-router-dom";
 import {} from "../AuthSlice";
 import { useForm } from "react-hook-form";
-import { createUserAsync,selectLoggedInUser } from "../AuthSlice";
-import {useDispatch, useSelector} from "react-redux"
+import { createUserAsync, selectLoggedInUser } from "../AuthSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 function Signup() {
   const {
@@ -13,16 +13,23 @@ function Signup() {
     formState: { errors },
   } = useForm();
   //  console.log(errors)
-  const dispatch = useDispatch()
-  const user = useSelector(selectLoggedInUser)
+  const dispatch = useDispatch();
+  const user = useSelector(selectLoggedInUser);
   // console.log(user?user:'hello')
   const onSubmit = (data) => {
-    dispatch(createUserAsync({email:data.email,password:data.password,addresses:[]}))
-    console.log(data)
+    dispatch(
+      createUserAsync({
+        email: data.email,
+        password: data.password,
+        addresses: [],
+        role:'user'// todo: this role given by backend
+      })
+    );
+    console.log(data);
   };
   return (
     <section className="relative py-4 lg:py-11 font-poppins h-screen flex">
-        { user && <Navigate to ='/' replace={true}></Navigate>}
+      {user && <Navigate to="/" replace={true}></Navigate>}
       <div className="max-w-6xl px-1 mx-auto lg:px-6 flex ">
         <div className="flex flex-wrap items-center ">
           <div className="w-full lg:w-2/5">
@@ -62,9 +69,9 @@ function Signup() {
                     className="relative w-full py-4 pl-4 mb-2 text-sm border rounded dark:text-gray-300 dark:border-gray-700 dark:bg-gray-700 md:mb-0"
                     placeholder="e.g:info@gmail.com"
                     {...register("email", {
-                      pattern:{
+                      pattern: {
                         value: /^[a-zA-Z0-9._-]+@gmail.com$/,
-                        message:"please add @ and gmail.com"
+                        message: "please add @ and gmail.com",
                       },
                       required: "email is required",
                     })}
@@ -74,7 +81,7 @@ function Signup() {
                       {errors.email.message}
                     </p>
                   )}
-                 
+
                   <span className="absolute top-0 left-0 inline-block px-1 ml-4 -mt-2 text-xs text-gray-500 bg-white dark:text-gray-300 dark:bg-gray-800">
                     Email address
                   </span>
@@ -127,9 +134,12 @@ function Signup() {
                     className="relative w-full py-4 pl-4 mb-2 text-sm border rounded dark:text-gray-300 dark:border-gray-800 md:mb-0 dark:bg-gray-700"
                     placeholder="conferm password..."
                     {...register("confermpassword", {
-                      validate: (value, formValues) => value === formValues.password || "Password not match"
+                      validate: (value, formValues) =>
+                        value === formValues.password || "Password not match",
                     })}
-                    onClick={()=>{reset(errors)}}
+                    onClick={() => {
+                      reset(errors);
+                    }}
                   />
                   {errors.confermpassword && (
                     <p role="alert" className="text-red-600">

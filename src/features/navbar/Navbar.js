@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Fragment, useEffect } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import {
   Bars3Icon,
@@ -6,9 +6,13 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import { Link, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { selectCartItem } from "../cart/CartSlice";
-const navigation = [];
+import { useDispatch, useSelector } from "react-redux";
+import { featchItemsByUserIdAsync, selectCartItem } from "../cart/CartSlice";
+import { featchLoggedInUserInfoAsync, selectUserinfo } from "../user/userSlice";
+import { selectLoggedInUser } from "../auth/AuthSlice";
+const navigation = [
+  {name:"Admin",link:'/admin',user:true}
+];
 
 function classs(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -18,6 +22,15 @@ export default function Navbar() {
   const navigate = useNavigate();
   const Product = useSelector(selectCartItem)
   const totalitem = Product.length
+  const dispatch = useDispatch()
+  const user = useSelector(selectLoggedInUser)
+  useEffect(()=>{
+  if(user){
+    dispatch( featchItemsByUserIdAsync(user.id))
+    dispatch(featchLoggedInUserInfoAsync(user.id));
+  }
+  },[dispatch,user])
+  const userinfo =useSelector(selectUserinfo)
   console.log(totalitem)
   return (
     <Disclosure as="nav" className="bg-gray-800">
@@ -43,12 +56,13 @@ export default function Navbar() {
                     Layout
                   </Link>
                 </div>
-                <div className="hidden sm:ml-6 sm:block">
+                <div className="hidden sm:ml-6 sm:flex justify-center items-center ">
                   <div className="flex space-x-4">
                     {navigation.map((item) => (
-                      <a
+                    <div>
+                      {!item[userinfo?.role] &&   <Link
                         key={item.name}
-                        href={item.href}
+                        to={item.link}
                         className={classs(
                           item.current
                             ? "bg-gray-900 text-white"
@@ -58,7 +72,8 @@ export default function Navbar() {
                         aria-current={item.current ? "page" : undefined}
                       >
                         {item.name}
-                      </a>
+                      </Link>}
+                    </div>
                     ))}
                   </div>
                 </div>
