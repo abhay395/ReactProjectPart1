@@ -28,6 +28,7 @@ import Box from "@mui/material/Box";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
 import { featchBrands, featchCategories } from "../ProductApi";
 import Navbar from "../../navbar/Navbar";
+import Pagination from "../../coman/Pagination";
 
 function classs(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -99,9 +100,7 @@ export default function ProductList() {
   };
   const handelSort = (e, option) => {
     const newSort = { _sort: option.sort, _order: option.order };
-    // // console.log(e.checked)
     setSort(newSort);
-    // // dispatch(featchAllProductByFilterAsync(newFilter))
   };
   const handelPage = (page) => {
     setpage(page);
@@ -308,105 +307,7 @@ export default function ProductList() {
   );
 }
 
-function Pagination({ handelPage, setpage, page, totaItems = 55 }) {
-  return (
-    <>
-      {" "}
-      <div className="flex items-center w-full justify-between border-t border-gray-700 bg-[#1a202c] px-4 py-3 sm:px-6">
-        <div className="flex flex-1 justify-between sm:hidden">
-          <div
-            onClick={() => {
-              if (page === 1) {
-                handelPage(1);
-              } else {
-                handelPage(page - 1);
-              }
-            }}
-            className="relative inline-flex cursor-pointer items-center rounded-md border border-gray-700 bg-[#1a202c] px-4 py-2 text-sm font-medium text-gray-400 hover:bg-gray-6000"
-          >
-            Previous
-          </div>
-          <div
-            onClick={() => {
-              if (page < totaItems / ITEMS_PER_PAGE) {
-                handelPage(page + 1);
-              }
-            }}
-            className="relative ml-3 inline-flex cursor-pointer items-center rounded-md border border-gray-700 bg-[#1a202c] px-4 py-2 text-sm font-medium text-gray-400 hover:bg-gray-500"
-          >
-            Next
-          </div>
-        </div>
-        <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
-          <div>
-            <p className="text-sm text-gray-400">
-              Showing{" "}
-              <span className="font-medium">
-                {(page - 1) * ITEMS_PER_PAGE + 1}
-              </span>{" "}
-              to <span className="font-medium">{page * ITEMS_PER_PAGE}</span> of{" "}
-              <span className="font-medium">{totaItems}</span> results
-            </p>
-          </div>
-          <div>
-            <nav
-              className="isolate inline-flex -space-x-px rounded-md shadow-sm"
-              aria-label="Pagination"
-            >
-              <div className="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-700 hover:bg-gray-500 focus:z-20 focus:outline-offset-0">
-                <span className="sr-only">Previous</span>
-                <ChevronLeftIcon
-                  className="h-5 w-5"
-                  onClick={() => {
-                    if (page === 1) {
-                      handelPage(1);
-                    } else {
-                      handelPage(page - 1);
-                    }
-                  }}
-                  aria-hidden="true"
-                />
-              </div>
-              {/* Current: "z-10 bg-indigo-600 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600", Default: "text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-500 focus:outline-offset-0" */}
 
-              {Array.from({
-                length: Math.ceil(totaItems / ITEMS_PER_PAGE),
-              }).map((el, index) => (
-                <div
-                  onClick={(e) => {
-                    handelPage(index + 1);
-                  }}
-                  key={index + 1}
-                  // aria-current="page"
-                  className={`relative z-10  inline-flex items-center ${
-                    page - 1 === index ? "bg-indigo-600" : " "
-                  } px-4 py-2 cursor-pointer text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600`}
-                >
-                  {index + 1}
-                </div>
-              ))}
-              <div
-                href="#"
-                className="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-700 hover:bg-gray-500 focus:z-20 focus:outline-offset-0"
-              >
-                <span className="sr-only">Next</span>
-                <ChevronRightIcon
-                  onClick={() => {
-                    if (page < totaItems / ITEMS_PER_PAGE) {
-                      handelPage(page + 1);
-                    }
-                  }}
-                  className="h-5 w-5"
-                  aria-hidden="true"
-                />
-              </div>
-            </nav>
-          </div>
-        </div>
-      </div>
-    </>
-  );
-}
 
 function ProductGrid({ products }) {
   return (
@@ -416,8 +317,9 @@ function ProductGrid({ products }) {
         {/* Products */}
         <div className="grid grid-cols-1  gap-x-6 gap-y-10 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
           {products ? (
-            products.map((product) => (
-              <Link to={`/product-detail/${product.id}`} key={product.id}>
+            products.map((product) => {
+              if(!product.delete){
+               return <Link to={`/product-detail/${product.id}`} key={product.id}>
                 <div className="relative overflow-hidden bg-white shadow rounded-xl  dark:bg-gray-700">
                   <div className="relative overflow-hidden">
                     <div className="mb-5 overflow-hidden">
@@ -457,7 +359,9 @@ function ProductGrid({ products }) {
                   </div>
                 </div>
               </Link>
-            ))
+              }
+            }
+            )
           ) : (
             <Box
               sx={{

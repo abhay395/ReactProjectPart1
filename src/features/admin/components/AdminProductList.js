@@ -459,6 +459,7 @@ function ProductGrid({ products }) {
                       Edit
                     </button>
                   </div>
+                  {product.delete?<p className="pl-1 text-red-600 " > this product deleted</p>:null}
                 </div>
               
             ))

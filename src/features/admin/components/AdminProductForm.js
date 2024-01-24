@@ -348,7 +348,9 @@ function AdminProductForm() {
             <button
               type="button"
               onClick={() => {
-                dispatch(deletProductAsync(param.id));
+                const product = {...selectedProduct}
+                product.delete = true
+                dispatch(updateProductAsync({ updateproductData: product, id: param.id }));
                 navigate('/admin')
               }}
               class="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white ml-3 bg-red-600 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-red-900 hover:bg-red-900"

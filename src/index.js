@@ -32,6 +32,7 @@ import AdminHomepage from "./Page/AdminHomePage.js";
 import ProtectedAdmin from "./features/auth/components/ProtectedAdmin.js";
 import AdminProductDetailPage from "./Page/AdminProductdetailPage.js";
 import AdminProductFormPage from "./Page/AdminProductFormPage.js";
+import AdminOrderPage from "./Page/AdminOrderPage.js";
 // import SearchitemArea from './Header/SearchitemArea.js'
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -51,6 +52,7 @@ const router = createBrowserRouter(
       <Route path="/admin/detail/product-detail/:id" element={<ProtectedAdmin><AdminProductDetailPage/></ProtectedAdmin>} />
       <Route path="/admin/product-form" element={<ProtectedAdmin><AdminProductFormPage/></ProtectedAdmin>} />
       <Route path="/admin/product-form/edite/:id" element={<ProtectedAdmin><AdminProductFormPage/></ProtectedAdmin>} />
+      <Route path="/admin/order" element={<ProtectedAdmin><AdminOrderPage/></ProtectedAdmin>} />
       
     </Route>
   )

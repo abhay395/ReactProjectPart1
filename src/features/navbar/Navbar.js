@@ -11,7 +11,9 @@ import { featchItemsByUserIdAsync, selectCartItem } from "../cart/CartSlice";
 import { featchLoggedInUserInfoAsync, selectUserinfo } from "../user/userSlice";
 import { selectLoggedInUser } from "../auth/AuthSlice";
 const navigation = [
-  {name:"Admin",link:'/admin',user:true}
+  {name:"Admin",link:'/admin',user:true},
+  {name:"Order",link:'/admin/order',user:true}
+
 ];
 
 function classs(...classes) {
@@ -60,7 +62,9 @@ export default function Navbar() {
                   <div className="flex space-x-4">
                     {navigation.map((item) => (
                     <div>
-                      {!item[userinfo?.role] &&   <Link
+                      {!item[userinfo?.role] && (
+                        <div>  
+                          <Link
                         key={item.name}
                         to={item.link}
                         className={classs(
@@ -72,7 +76,22 @@ export default function Navbar() {
                         aria-current={item.current ? "page" : undefined}
                       >
                         {item.name}
-                      </Link>}
+                      </Link>
+                      {/* <Link
+                        key={item.name}
+                        to={item.link}
+                        className={classs(
+                          item.current
+                            ? "bg-gray-900 text-white"
+                            : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                          "rounded-md px-3 py-2 text-sm font-medium"
+                        )}
+                        aria-current={item.current ? "page" : undefined}
+                      >
+                        {item.name}
+                      </Link> */}
+                          </div>
+                      )}
                     </div>
                     ))}
                   </div>
