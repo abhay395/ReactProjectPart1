@@ -28,6 +28,8 @@ import Box from "@mui/material/Box";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
 // import { featchBrands, featchCategories } from "../ProductApi";
 import Navbar from "../../navbar/Navbar";
+import { selectLoggedInUser } from "../../auth/AuthSlice";
+import { selectUserinfo } from "../../user/userSlice";
 
 function classs(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -43,6 +45,7 @@ export default function AdminProductList() {
   const categorys = useSelector(SelectCategories);
   const brands = useSelector(SelectBrands);
   const totalItems = useSelector(SelectTotalItems);
+  // // // const user = useSelector(selectUserinfo)
   //*useSeltector use
 
   const [filter, setFilter] = useState({});
@@ -94,18 +97,13 @@ export default function AdminProductList() {
     }
     console.log(newFilter);
     setFilter(newFilter);
-    // // dispatch(featchAllProductByFilterAsync(newFilter))
-    // console.log(e.currentTarget.checked)
   };
   const handelSort = (e, option) => {
     const newSort = { _sort: option.sort, _order: option.order };
-    // // console.log(e.checked)
     setSort(newSort);
-    // // dispatch(featchAllProductByFilterAsync(newFilter))
   };
   const handelPage = (page) => {
     setpage(page);
-    // // console.log(page)
   };
   // TODO: HANDLEARS
 
@@ -458,8 +456,9 @@ function ProductGrid({ products }) {
                     <button onClick={()=>navigate(`/admin/product-form/edite/${product.id}`)} className="flex-1 text-xl text-white transition-all bg-blue-500  hover:bg-blue-600 ">
                       Edit
                     </button>
+                    {product.stock===0 && <p  className="text-red-600 font-bold absolute top-0" >out of stock</p>}
                   </div>
-                  {product.delete?<p className="pl-1 text-red-600 " > this product deleted</p>:null}
+                  {product.deleted?<p className="pl-1 text-red-600 " > this product deleted</p>:null}
                 </div>
               
             ))

@@ -37,7 +37,7 @@ function AdminProductForm() {
       product.image3,
       product.image4,
     ];
-    product.rating = selectedProduct[0].rating || 0;
+    product.rating = selectedProduct.rating || 0;
     delete product["image1"];
     delete product["image2"];
     delete product["image3"];
@@ -45,29 +45,31 @@ function AdminProductForm() {
     product.price = +product.price;
     product.stock = +product.stock;
     product.discountPercentage = +product.discountPercentage;
+    product.id=selectedProduct.id
     // // product.price
     // // console.log(product,'[[')
     if (!param.id) {
       dispatch(createProductAsync(product));
       setValue("title", "");
     }
-    dispatch(updateProductAsync({ updateproductData: product, id: param.id }));
+    // // console.log(product)
+    dispatch(updateProductAsync(product));
     // console.log(param.id,product)
-    navigate(`/admin/detail/product-detail/${param.id}`);
+    navigate(`/admin`);
     // reset()
   };
   // const Product  = useSelector(SelectSingelProduct)
   useEffect(() => {
     if (param.id) {
       dispatch(featchSingelProductAsync({ id: param.id }));
-      //  console.log(selectedProduct[0])
+      //  console.log(selectedProduct)
     } else {
       dispatch(clearSelectedProduct());
     }
   }, [param, dispatch]);
   useEffect(() => {
     if (selectedProduct.length !== 0) {
-      const product = selectedProduct[0];
+      const product = selectedProduct;
       console.log(product);
 
       const fieldsToSet = [
@@ -348,10 +350,10 @@ function AdminProductForm() {
             <button
               type="button"
               onClick={() => {
-                const product = {...selectedProduct}
-                product.delete = true
-                dispatch(updateProductAsync({ updateproductData: product, id: param.id }));
-                navigate('/admin')
+                const product = {...selectedProduct,deleted:true}
+              // //  console.log(product)
+                dispatch(updateProductAsync(product));
+                // // navigate('/admin')
               }}
               class="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white ml-3 bg-red-600 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-red-900 hover:bg-red-900"
             >

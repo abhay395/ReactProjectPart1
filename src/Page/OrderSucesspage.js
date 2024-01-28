@@ -7,12 +7,12 @@ import { resetCurrentOrder } from "../features/order/OrderSlice";
 
 function OrderSucces({order}) {
   const params = useParams()
-  const  user = useSelector(selectLoggedInUser)
+  // // const  user = useSelector(selectLoggedInUser)
   const dispatch = useDispatch()
   // const  id = user?.id
-  console.log(user.id,"sd")
+  // // console.log(user.id,"sd")
   useEffect(()=>{
-    dispatch(resetCartAsync(user?.id));
+    dispatch(resetCartAsync());
     dispatch(resetCurrentOrder())
   },[dispatch])
   return (

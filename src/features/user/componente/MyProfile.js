@@ -7,35 +7,35 @@ import {
   selectUserinfo,
   updateUserAsync,
 } from "../userSlice";
-import { selectLoggedInUser } from "../../auth/AuthSlice";
+// // import { selectLoggedInUser } from "../../auth/AuthSlice";
 import Navbar from "../../navbar/Navbar";
 import { useForm } from "react-hook-form";
 
-const user = {
-  email: "Abhayparja90@gmail.com",
-  password: "Abhay@4545",
-  addresses: [
-    {
-      fullName: "Abhay Prajapati",
-      email: "abhayparj@gmail.com",
-      phone: "9509123636",
-      streetAddress: "iti square gori nagar ",
-      city: "indore",
-      state: "Madhya pradesh",
-      pinCode: "45001",
-    },
-    {
-      fullName: "Abhay Prajapati",
-      email: "abhayparj@gmail.com",
-      phone: "9509123636",
-      streetAddress: "iti square gori nagar ",
-      city: "indore",
-      state: "Madhya pradesh",
-      pinCode: "45001",
-    },
-  ],
-  id: 2,
-};
+// // const user = {
+// //   email: "Abhayparja90@gmail.com",
+// //   password: "Abhay@4545",
+// //   addresses: [
+// //     {
+// //       fullName: "Abhay Prajapati",
+// //       email: "abhayparj@gmail.com",
+// //       phone: "9509123636",
+// //       streetAddress: "iti square gori nagar ",
+// //       city: "indore",
+// //       state: "Madhya pradesh",
+// //       pinCode: "45001",
+// //     },
+// //     {
+// //       fullName: "Abhay Prajapati",
+// //       email: "abhayparj@gmail.com",
+// //       phone: "9509123636",
+// //       streetAddress: "iti square gori nagar ",
+// //       city: "indore",
+// //       state: "Madhya pradesh",
+// //       pinCode: "45001",
+// //     },
+// //   ],
+// //   id: 2,
+// // };
 
 const UserProfile = () => {
   const {
@@ -115,7 +115,7 @@ const UserProfile = () => {
               User Profile
             </h1>
             <p className="text-gray-400">{userinfo?.email}</p>
-            {userinfo.role === "admin" && (
+            {userinfo?.role === "admin" && (
               <h3 className="text-gray-400">role:{userinfo.role}</h3>
             )}
           </div>

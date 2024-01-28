@@ -7,11 +7,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link, Navigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import {
-  checkUserAsync,
+  LoginUserAsync,
+  checkAuthAsync,
   createUserAsync,
   resetError,
   selectError,
-  selectLoggedInUser,
+  // // selectLoggedInUser,
+  selectLoggedInUserToken,
 } from "../AuthSlice";
 
 export default function Login() {
@@ -24,19 +26,18 @@ export default function Login() {
   } = useForm();
   //  console.log(errors)
   const dispatch = useDispatch();
-  const user = useSelector(selectLoggedInUser);
+  const user = useSelector(selectLoggedInUserToken);
   const errorsfromApi = useSelector(selectError);
   // console.log(errorsfromApi?.message,"eror")
   // console.log(user?user:'hello')
-  useEffect(() => {
-    const intervel = setInterval(() => dispatch(resetError()), 5000);
-    return () => clearInterval(intervel);
-  }, []);
+  // // useEffect(() => {
+  // //   const intervel = setInterval(() => dispatch(resetError()), 5000);
+  // //   return () => clearInterval(intervel);
+  // // }, []);
   const onSubmit = (data) => {
-    dispatch(checkUserAsync({ email: data.email, password: data.password }));
+    dispatch(LoginUserAsync({ email: data.email, password: data.password }));
     console.log(data, "from logoin");
   };
-
   return (
     <>
    { user && <Navigate to ='/' replace={true}></Navigate>}
@@ -119,7 +120,7 @@ export default function Login() {
                   </button>
                   {errorsfromApi && (
                     <p role="alert" className="text-red-700">
-                      {errorsfromApi?.message}
+                      {errorsfromApi}
                     </p>
                   )}
                   <p className="mt-4 text-sm text-gray-700 dark:text-gray-400">

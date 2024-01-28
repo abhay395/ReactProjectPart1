@@ -22,22 +22,23 @@ function Checkout() {
   const user = useSelector(selectUserinfo);
   const currentOrder = useSelector(SelectCurrentOrder)
   const total = Product?.reduce((acu, current) => {
-    return acu + current.price * current.quantity;
+    return acu + current.productId.price * current.quantity;
   }, 0);
   
   const [selectedAddress, setSelectedAdress] = useState(null);
   const [paymentMethode, setpaymentMethode] = useState("cash");
-  const discount = Product?.reduce((acu, currentva) => {
+  const discount = Product?.reduce((acu, current) => {
     return (
       acu +
       Math.round(
-        (currentva.price * currentva.quantity) / currentva.discountPercentage
+        (current.productId.price * current.quantity) / current.productId.discountPercentage
       )
     );
   }, 0);
 
   // console.log(total, discount);
   const deletehandler = (id) => {
+    // console.log(id)
     dispatch(deleteItemFromCartAsync(id));
   };
   const {
@@ -72,7 +73,7 @@ function Checkout() {
     const order = {
       items: Product,
       total,
-      user: user,
+      // user: user.id,
       discount,
       paymentMethode,
       selectedAddress,
@@ -384,7 +385,7 @@ function Checkout() {
                             </span>
                             <img
                               className="h-24  w-24  rounded-lg object-cover"
-                              src={product.thumbnail}
+                              src={product.productId.thumbnail}
                               alt=""
                             />
                           </div>
@@ -393,13 +394,13 @@ function Checkout() {
                             <div className="sm:col-gap-5 flex justify-between sm:grid sm:grid-cols-2">
                               <div className="pr-8 sm:pr-5">
                                 <p className="text-base font-semibold text-gray-400">
-                                  {`${product.title.slice(0, 9)}...`}
+                                  {`${product.productId.title.slice(0, 9)}...`}
                                 </p>
                               </div>
 
                               <div className=" flex  justify-between sm:mt-0 items-start sm:justify-end">
                                 <p className="shrink-0 w-20 text-base font-semibold text-gray-400 sm:order-2 sm:ml-8 sm:text-right">
-                                  {product.price}$
+                                  {product.productId.price}$
                                 </p>
                               </div>
                             </div>
@@ -450,7 +451,7 @@ function Checkout() {
                       <span className="text-xs font-normal text-gray-400">
                         USD
                       </span>{" "}
-                      {total}
+                      {total-discount}
                     </p>
                   </div>
 

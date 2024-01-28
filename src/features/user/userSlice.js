@@ -9,15 +9,15 @@ const initialState = {
 
 export const featchLoggedInUserOrderAsync = createAsyncThunk(
   "user/featchLoggedInUserOrder",
-  async (userId) => {
-    const response = await featchLoggedInUserOrder(userId);
+  async () => {
+    const response = await featchLoggedInUserOrder();
     return response.data;
   }
 );
 export const featchLoggedInUserInfoAsync = createAsyncThunk(
   "user/featchLoggedInUserInfo",
-  async (userId) => {
-    const response = await featchLoggedInUserInfo(userId);
+  async () => {
+    const response = await featchLoggedInUserInfo();
     return response.data;
   }
 );

@@ -10,10 +10,10 @@ import { selectLoggedInUser } from "../../auth/AuthSlice";
 function ProductDetail() {
   const CartItems = useSelector(selectCartItem);
   const Product = useSelector(SelectSingelProduct);
-  const user = useSelector(selectLoggedInUser);
+  // // const user = useSelector(selectLoggedInUser);
   const { id } = useParams();
-  console.log(Product[0]);
-  const product = Product[0];
+  console.log(Product);
+  const product = Product;
   const [quantity, setquantity] = useState(1);
   // Array.l
   const dispatch = useDispatch();
@@ -22,16 +22,15 @@ function ProductDetail() {
   }, [dispatch, id]);
 
   const handleAddToCart = (e) => {
-    if (CartItems.findIndex((item) => item.productId === product.id) < 0) {
+    if (CartItems.findIndex((item) => item.productId.id === product.id) < 0) {
       // ?this is for not repeateProduct
       const newItem = {
-        ...product,
         productId: product.id,
         quantity: quantity,
-        user: user.id,
       };
 
-      delete newItem["id"];
+      // // delete newItem["id"];
+      console.log(newItem)
       dispatch(addToCartAsync(newItem));
     } else {
       alert("this item already added");
@@ -53,7 +52,7 @@ function ProductDetail() {
 
               <div className="  w-full sm:w-96 md:w-8/12 lg:w-6/12 items-center">
                 <h2 className="font-semibold lg:text-4xl text-3xl lg:leading-9 leading-7 text-gray-[#424242] 800 mt-4">
-                  {Product[0].title}
+                  {Product.title}
                 </h2>
 
                 <div className=" flex flex-row justify-between items-baseline  mt-5">
@@ -124,16 +123,16 @@ function ProductDetail() {
                       />
                     </svg>
                     <p className="text-[19px] text-gray-900 ">
-                      {Product[0].rating}
+                      {Product.rating}
                     </p>
                   </div>
                 </div>
 
                 <p className=" font-normal text-base leading-6 text-gray-[#424242] 600 mt-7">
-                  {Product[0].description}
+                  {Product.description}
                 </p>
                 <p className=" font-semibold lg:text-2xl text-xl lg:leading-6 leading-5 mt-6 ">
-                  $ {Product[0].price}
+                  $ {Product.price}
                 </p>
 
                 <div className="lg:mt-11 mt-10">
@@ -175,13 +174,13 @@ function ProductDetail() {
               <div className="w-full sm:w-96 max-h-[400px] md:w-8/12 lg:w-6/12 flex lg:flex-row flex-col lg:gap-8 sm:gap-6 gap-4">
                 <div className="w-full lg:w-8/12  flex justify-center items-center">
                   <img
-                    src={Product[0].thumbnail}
+                    src={Product.thumbnail}
                     alt="Wooden Chair Preview"
                     className="h-full object-fill max-h-[400px]"
                   />
                 </div>
                 <div className="w-full in lg:w-4/12 lg:grid hidden lg:grid-cols-1 sm:grid-cols-4 grid-cols-2 gap-6">
-                  {Product[0].images.slice(1, 4).map((item, index) => (
+                  {Product.images.slice(1, 4).map((item, index) => (
                     <div
                       key={index}
                       className="bg-gray-100 flex h-[177px] max-h-[117px] justify-center items-center"

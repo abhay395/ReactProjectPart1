@@ -1,9 +1,10 @@
 import { useSelector } from "react-redux";
-import { selectLoggedInUser } from "../AuthSlice";
+// // import { selectLoggedInUserToken } from "../AuthSlice";
 import { Navigate } from "react-router";
+import { selectUserinfo } from "../../user/userSlice";
 
 function ProtectedAdmin({children}) {
-    const user = useSelector(selectLoggedInUser)
+    const user = useSelector(selectUserinfo)
     // console.log(!user)
    if(!user) {
     return <Navigate to='/login'></Navigate>;

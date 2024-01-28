@@ -1,15 +1,15 @@
 import { useDispatch, useSelector } from "react-redux";
-import { featchLoggedInUserOrderAsync, selectUserOrders } from "../userSlice";
+import { featchLoggedInUserOrderAsync, selectUserOrders, selectUserinfo } from "../userSlice";
 import { useEffect } from "react";
 import { selectLoggedInUser } from "../../auth/AuthSlice";
 import Navbar from "../../navbar/Navbar";
 
 function MyOrders() {
     const dispatch = useDispatch()
-    const user = useSelector(selectLoggedInUser)
+    // // // const user = useSelector(selectUserinfo)
     // console.log(user,'my')
     useEffect(()=>{
-        dispatch(featchLoggedInUserOrderAsync(user?.id))
+        dispatch(featchLoggedInUserOrderAsync())
     },[dispatch])
     const userorder = useSelector(selectUserOrders)
     console.log(userorder)
@@ -17,7 +17,7 @@ function MyOrders() {
     return ( 
         <div>
          <div className="sticky top-0 z-50" ><Navbar/></div>
-          {userorder.map((item)=>(
+          {userorder.slice().reverse().map((item)=>(
           <div class="py-14 px-4 md:px-6 2xl:px-20 2xl:container 2xl:mx-auto">
             
         <div class="flex justify-start item-start space-y-2 flex-col">
@@ -32,28 +32,28 @@ function MyOrders() {
               {item.items.map((product)=>(
                 <div class="mt-4 md:mt-6 flex flex-col md:flex-row justify-start items-start md:items-center md:space-x-6 xl:space-x-8 w-full">
                 <div class="pb-4 md:pb-8 w-full md:w-40">
-                  <img class="w-full hidden md:block h-[100px]" src={product.thumbnail} alt="dress" />
-                  <img class="w-full md:hidden h-[300px]" src={product.thumbnail} alt="dress" />
+                  <img class="w-full hidden md:block h-[100px]" src={product.productId.thumbnail} alt="dress" />
+                  <img class="w-full md:hidden h-[300px]" src={product.productId.thumbnail} alt="dress" />
                 </div>
                 <div class="border-b border-gray-200 md:flex-row flex-col flex justify-between items-start w-full pb-8 space-y-4 md:space-y-0">
                   <div class="w-full flex flex-col justify-start items-start space-y-8">
-                    <h3 class="text-xl dark:text-white xl:text-2xl font-semibold leading-6 text-gray-800">{product.title}</h3>
+                    <h3 class="text-xl dark:text-white xl:text-2xl font-semibold leading-6 text-gray-800">{product.productId.title}</h3>
                     <div class="flex justify-start items-start flex-col h-[30px] space-y-2">
                       {/* <p class="text-sm dark:text-white leading-none text-gray-800"><span class="dark:text-gray-400 text-gray-300">Style: </span> Italic Minimal Design</p>
                       <p class="text-sm dark:text-white leading-none text-gray-800"><span class="dark:text-gray-400 text-gray-300">Size: </span> Small</p>
                       <p class="text-sm dark:text-white leading-none text-gray-800"><span class="dark:text-gray-400 text-gray-300">Color: </span> Light Blue</p> */}
-                      {product.description}
+                      {product.productId.description.slice(0,50)}...
                     </div>
                   </div>
                   <div class="flex justify-between space-x-8 items-start w-full">
                     <p class="text-base dark:text-white xl:text-lg leading-6"> ${Math.round(
-                          product.price -
-                            product.price * (product.discountPercentage / 100)
-                        )} <span class="text-red-300 line-through"> ${product.price}</span></p>
-                    <p class="text-base dark:text-white xl:text-lg leading-6 text-gray-800">{product.quantity}</p>
+                          product.productId.price -
+                            product.productId.price * (product.productId.discountPercentage / 100)
+                        )} <span class="text-red-300 line-through"> ${product.productId.price}</span></p>
+                    <p class="text-base dark:text-white xl:text-lg leading-6 text-gray-800">{product.productId.quantity}</p>
                     <p class="text-base dark:text-white xl:text-lg font-semibold leading-6 text-gray-800"> ${Math.round(
-                          product.price -
-                            product.price * (product.discountPercentage / 100)
+                          product.productId.price -
+                            product.productId.price * (product.productId.discountPercentage / 100)
                         )}</p>
                   </div>
                 </div>

@@ -1,5 +1,5 @@
 import { Link, Navigate } from "react-router-dom";
-import {} from "../AuthSlice";
+import { selectLoggedInUserToken } from "../AuthSlice";
 import { useForm } from "react-hook-form";
 import { createUserAsync, selectLoggedInUser } from "../AuthSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,7 +14,7 @@ function Signup() {
   } = useForm();
   //  console.log(errors)
   const dispatch = useDispatch();
-  const user = useSelector(selectLoggedInUser);
+  const user = useSelector(selectLoggedInUserToken);
   // console.log(user?user:'hello')
   const onSubmit = (data) => {
     dispatch(

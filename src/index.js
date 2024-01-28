@@ -40,7 +40,7 @@ const router = createBrowserRouter(
       <Route path="/" element={<Protected><Home/></Protected>} />
       <Route path="/login" element={<LoginPage/>} />
       <Route path="/signup" element={<SignupPage/>} />
-      <Route path="/cart" element={<Protected><CartPage/></Protected>} />
+      <Route path="/react/cart" element={<Protected><CartPage/></Protected>} />
       <Route path="/checkout" element={<Protected><CheckoutPage/></Protected>} />
       <Route path="/product-detail/:id" element = {<Protected><ProductDetail/></Protected>} />
       <Route path="*" element = {<PageNotFound/>} />

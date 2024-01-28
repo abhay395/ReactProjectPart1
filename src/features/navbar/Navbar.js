@@ -9,7 +9,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { featchItemsByUserIdAsync, selectCartItem } from "../cart/CartSlice";
 import { featchLoggedInUserInfoAsync, selectUserinfo } from "../user/userSlice";
-import { selectLoggedInUser } from "../auth/AuthSlice";
+import { checkAuthAsync, selectLoggedInUser, selectLoggedInUserToken } from "../auth/AuthSlice";
 const navigation = [
   {name:"Admin",link:'/admin',user:true},
   {name:"Order",link:'/admin/order',user:true}
@@ -25,15 +25,16 @@ export default function Navbar() {
   const Product = useSelector(selectCartItem)
   const totalitem = Product.length
   const dispatch = useDispatch()
-  const user = useSelector(selectLoggedInUser)
-  useEffect(()=>{
-  if(user){
-    dispatch( featchItemsByUserIdAsync(user.id))
-    dispatch(featchLoggedInUserInfoAsync(user.id));
-  }
-  },[dispatch,user])
-  const userinfo =useSelector(selectUserinfo)
-  console.log(totalitem)
+  const user = useSelector(selectLoggedInUserToken)
+  const userinfo = useSelector(selectUserinfo)
+  // useEffect(()=>{
+  // // if(user){
+  // //   dispatch( featchItemsByUserIdAsync())
+  // //   dispatch(featchLoggedInUserInfoAsync());
+  // // }
+  // // },[dispatch,user])
+  // // const userinfo =useSelector(selectUserinfo)
+  // // console.log(totalitem)
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
@@ -62,7 +63,7 @@ export default function Navbar() {
                   <div className="flex space-x-4">
                     {navigation.map((item) => (
                     <div>
-                      {!item[userinfo?.role] && (
+                      {userinfo?.role==='admin' && (
                         <div>  
                           <Link
                         key={item.name}
@@ -100,7 +101,7 @@ export default function Navbar() {
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 <button
                   type="button"
-                  onClick={() => navigate("/cart")}
+                  onClick={() => navigate("/react/cart")}
                   className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                 >
                   <span className="absolute -inset-1.5 " />

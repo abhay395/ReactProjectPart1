@@ -17,7 +17,7 @@ function AdminOrder() {
   const dispatch = useDispatch();
   const [page, setpage] = useState(1);
   const [pages, setPages] = useState([1, 2, 3, 4, 5, 6]);
-  const [sort, setSort] = useState({});
+  const [sort, setSort] = useState({_sort: '', _order: '' });
   const [currentPage, setCurrentPage] = useState(1);
   const [editabelOrderId, seteditabelOrderId] = useState(-1);
   const totalOrders = useSelector(selectTotalOrders);
@@ -61,19 +61,19 @@ function AdminOrder() {
                   <tr className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
                     <th
                       className="py-3 px-6 text-left cursor-pointer"
-                      onClick={() => {
-                        handelSort({
-                          sort: "id",
-                          order: sort._order === "asc" ? "desc" : "asc",
-                        });
-                      }}
+                      // onClick={() => {
+                      //   handelSort({
+                      //     sort: "id",
+                      //     order: sort._order === "asc" ? "desc" : "asc",
+                      //   });
+                      // }}
                     >
                       Order #
-                      {sort._sort==='id' &&( sort._order==='asc' ? (
+                      {/* {sort._sort==='id' &&( sort._order==='asc' ? (
                       <ArrowDownIcon className="inline ml-3 w-4 h-4" />
                       ) : (
                         <ArrowUpIcon className="inline ml-3 w-4 h-4" />
-                      ))}
+                      ))} */}
                     </th>
                     {/* <th className="py-3 px-6 text-left">Items</th> */}
                     <th className="py-3 px-6 text-left">Items</th>
@@ -83,6 +83,7 @@ function AdminOrder() {
                           sort: "total",
                           order: sort._order === "asc" ? "desc" : "asc",
                         });
+                        setCurrentPage(1)
                       }}
                     >
                       TOTOAL AMOUNT
@@ -110,12 +111,12 @@ function AdminOrder() {
                           <div className="mr-2">
                             <img
                               className="w-6 h-6 rounded-full"
-                              src={item.items[0].thumbnail}
+                              src={item.items[0].productId.thumbnail}
                             />
                           </div>
                           <span>
-                            {item.items[0].title} - #{item.items[0].quantity} -
-                            ${item.items[0].price}
+                            {item.items[0].productId.title} - #{item.items[0].quantity} -
+                            ${item.items[0].productId.price}
                           </span>
                         </div>
                       </td>
@@ -275,7 +276,7 @@ function AdminOrder() {
                             : ""
                         }`}
                         onClick={() => {
-                          handelPage();
+                          handelPage(idx+1);
                         }}
                       >
                         {idx + 1}

@@ -35,8 +35,8 @@ export const featchBrandAsync = createAsyncThunk(
 );
 export const featchAllProductByFilterAsync = createAsyncThunk(
   "product/featchAllProductByFilter",
-  async ({ filter, sort, pagination }) => {
-    const response = await featchAllProductByFilter(filter, sort, pagination);
+  async ({ filter, sort, pagination ,role}) => {
+    const response = await featchAllProductByFilter(filter, sort, pagination,role);
     return response.data;
   }
 );
@@ -49,15 +49,15 @@ export const featchSingelProductAsync = createAsyncThunk(
 );
 export const createProductAsync = createAsyncThunk(
   "product/createProduct",
-  async (updateData) => {
-    const response = await createProduct(updateData);
+  async (addData) => {
+    const response = await createProduct(addData);
     return response.data;
   }
 );
 export const updateProductAsync = createAsyncThunk(
   "product/updateProduct",
-  async ({ updateproductData, id }) => {
-    const response = await updateProduct(updateproductData, id);
+  async (updateproductData) => {
+    const response = await updateProduct(updateproductData);
     return response.data;
   }
 );

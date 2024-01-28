@@ -16,19 +16,20 @@ export default function Cart() {
   const navigate = useNavigate()
   const Product = useSelector(selectCartItem);
   const total = Product?.reduce((acu, current) => {
-    return acu + current.price * current.quantity;
+    return acu + current.productId.price * current.quantity;
   }, 0);
   const discount = Product?.reduce((acu, currentva) => {
     return (
       acu +
       Math.round(
-        (currentva.price * currentva.quantity) / currentva.discountPercentage
+        (currentva.productId.price * currentva.quantity) / currentva.productId.discountPercentage
       )
     );
   }, 0);
   // console.log(total, discount);
-  const handelQuantity = (e, item) => {
-    dispatch(updateCartAsync({ ...item, quantity: +e.target.value }));
+  const handelQuantity = (e,item) => {
+    console.log({ productId:item.productId.id, quantity: +e.target.value,id:item.id })
+    dispatch(updateCartAsync({ productId:item.productId.id, quantity: +e.target.value,id:item.id }));
   };
   const deletehandler = (id) => {
     dispatch(deleteItemFromCartAsync(id));
@@ -44,21 +45,21 @@ export default function Cart() {
             {Product.map((item,index) => (
               <div key={index} className="justify-between lg:max-h-[150px] mb-6 rounded-lg bg-[#2d3748] p-6 shadow-md sm:flex sm:justify-start">
                 <img
-                  src={item.thumbnail}
+                  src={item.productId.thumbnail}
                   alt="product-image"
                   className="w-full rounded-lg max-h-[150px] object-fill sm:w-40"
                 />
                 <div className="sm:ml-4 sm:flex sm:w-full sm:justify-between">
                   <div className="mt-5 sm:mt-0">
                     <h2 className="text-lg font-bold text-[#CCCCCC]">
-                      {item.title}
+                      {item.productId.title}
                     </h2>
                   </div>
                   <div className="mt-4 flex justify-between sm:space-y-6 sm:mt-0 sm:block sm:space-x-6">
                     <div className="flex items-center border-gray-100">
                       <p className="mr-2 text-[20px]">Qty :</p>
                       <select
-                        onChange={(e) => handelQuantity(e, item)}
+                        onChange={(e) => handelQuantity(e,item)}
                         value={item.quantity}
                         className="rounded-lg bg-gray-700 "
                         name=""
@@ -73,7 +74,7 @@ export default function Cart() {
                       </select>
                     </div>
                     <div className="flex items-center space-x-4">
-                      <p className="text-sm">{item.price}$</p>
+                      <p className="text-sm">{item.productId.price}$</p>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"

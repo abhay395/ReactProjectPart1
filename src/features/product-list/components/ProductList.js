@@ -29,6 +29,7 @@ import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
 import { featchBrands, featchCategories } from "../ProductApi";
 import Navbar from "../../navbar/Navbar";
 import Pagination from "../../coman/Pagination";
+import { selectLoggedInUser } from "../../auth/AuthSlice";
 
 function classs(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -44,6 +45,7 @@ export default function ProductList() {
   const categorys = useSelector(SelectCategories);
   const brands = useSelector(SelectBrands);
   const totalItems = useSelector(SelectTotalItems);
+  // // const user = useSelector(selectLoggedInUser)
   //*useSeltector use
 
   const [filter, setFilter] = useState({});
@@ -318,7 +320,7 @@ function ProductGrid({ products }) {
         <div className="grid grid-cols-1  gap-x-6 gap-y-10 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
           {products ? (
             products.map((product) => {
-              if(!product.delete){
+              
                return <Link to={`/product-detail/${product.id}`} key={product.id}>
                 <div className="relative overflow-hidden bg-white shadow rounded-xl  dark:bg-gray-700">
                   <div className="relative overflow-hidden">
@@ -356,10 +358,11 @@ function ProductGrid({ products }) {
                     <button className="flex-1 text-sm text-white transition-all bg-blue-500 rounded-r-none hover:bg-blue-600 rounded-t-xl">
                       Add To Cart
                     </button>
+                    {product.stock===0 && <p  className="text-red-600 font-bold absolute top-0" >out of stock</p>}
                   </div>
                 </div>
               </Link>
-              }
+              
             }
             )
           ) : (

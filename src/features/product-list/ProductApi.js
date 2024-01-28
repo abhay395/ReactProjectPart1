@@ -2,7 +2,7 @@
 export function featchAllProducts() {
   return new Promise(async (resolve) => {
     //TODO:we will not head-code server URL here
-    const response = await fetch("http://localhost:8080/products");
+    const response = await fetch("/products");
     const data = await response.json();
     resolve({ data });
   });
@@ -10,7 +10,7 @@ export function featchAllProducts() {
 export function featchCategories() {
   return new Promise(async (resolve) => {
     //TODO:we will not head-code server URL here
-    const response = await fetch("http://localhost:8080/categorys");
+    const response = await fetch("/categorys");
     const data = await response.json();
     resolve({ data });
   });
@@ -18,7 +18,7 @@ export function featchCategories() {
 export function featchBrands() {
   return new Promise(async (resolve) => {
     //TODO:we will not head-code server URL here
-    const response = await fetch("http://localhost:8080/brands");
+    const response = await fetch("/brands");
     const data = await response.json();
     resolve({ data });
   });
@@ -27,7 +27,7 @@ export function featchSingelProduct(id) {
   console.log(id);
   return new Promise(async (resolve) => {
     //TODO:we will not head-code server URL here
-    const response = await fetch(`http://localhost:8080/products?id=${id}`);
+    const response = await fetch(`/products/`+id);//! yaha per error ayega kyoki is hame object milega pehle arrray mila tha
     const data = await response.json();
     resolve({ data });
   });
@@ -36,7 +36,7 @@ export function createProduct(addData) {
   // console.log(id)
   return new Promise(async (resolve) => {
     //TODO:we will not head-code server URL here
-    const response = await fetch(`http://localhost:8080/products`, {
+    const response = await fetch(`/products`, {
       method: "POST",
       body: JSON.stringify(addData),
       headers: { "content-type": "application/json" },
@@ -52,7 +52,7 @@ export function featchAllProductByFilter(filter, sort, pagination) {
 
   // TODO: on server we will support multi values
 
-  let queryString = "";
+  let queryString = '';
   // let sort=''
 
   for (let key in sort) {
@@ -73,21 +73,23 @@ export function featchAllProductByFilter(filter, sort, pagination) {
   return new Promise(async (resolve) => {
     //TODO:we will not head-code server URL here
     const response = await fetch(
-      "http://localhost:8080/products?" + queryString
+      "/products?" + queryString
     );
     const data = await response.json();
     const totalItems = await response.headers.get("X-Total-Count");
-    resolve({ data: { products: data, totalItems: +totalItems } });
+    console.log(totalItems)
+    resolve({ data: { products: data, totalItems: totalItems } });
   });
 }
-export function updateProduct(updateproductData, id) {
+export function updateProduct(updateproductData) {
+  const id = updateproductData.id
   return new Promise(async (resolve) => {
-    const response = await fetch("http://localhost:8080/products/" + id, {
+    const response = await fetch("/products/" + id, {
       method: "PATCH",
       body: JSON.stringify(updateproductData),
       headers: { "content-type": "application/json" },
     });
-    console.log(id, updateproductData);
+    // // console.log(id, updateproductData);
     const data = await response.json();
     // TODO: on Server it will only  return some infor of user (not password)
     resolve({ data });
@@ -96,7 +98,7 @@ export function updateProduct(updateproductData, id) {
 export function deleteProduct(productId) {
   return new Promise(async (resolve) => {
     const response = await fetch(
-      "http://localhost:8080/products/" + productId,
+      "/products/" + productId,
       {
         method: "DELETE",
       }

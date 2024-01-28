@@ -1,20 +1,20 @@
-export function featchLoggedInUserOrder(userid){
+export function featchLoggedInUserOrder(){
   return new Promise(async (resolve)=>{
-    const response  = await fetch('http://localhost:8080/orders/?user.id='+userid)
+    const response  = await fetch('/orders/')
     const data = await response.json()
     resolve ({data})
   })
 }
-export function featchLoggedInUserInfo(userid){
+export function featchLoggedInUserInfo(){
   return new Promise(async (resolve)=>{
-    const response  = await fetch('http://localhost:8080/users/'+userid)
+    const response  = await fetch('/users/own')
     const data = await response.json()
     resolve ({data})
   })
 }
 export function updateUser(update) {
   return new Promise(async (resolve) => {
-    const response = await fetch("http://localhost:8080/users/"+update.id, {
+    const response = await fetch("/users/", {
       method: "PATCH",
       body: JSON.stringify(update),
       headers: { "content-type": "application/json" },
