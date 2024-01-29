@@ -93,6 +93,7 @@ export const userSlice = createSlice({
       })
       .addCase(signOutAsync.fulfilled, (state, action) => {
         state.status = 'idle';
+        // // state.userChecked=false
         state.loggedInUserToken = null;
       })
   },
@@ -103,5 +104,6 @@ export const {resetError} = userSlice.actions;
 export const selectLoggedInUserToken = (state) => state.auth.loggedInUserToken;
 export const selectError = (state) => state.auth.errors;
 export const selectUserChecked = (state)=>state.auth.userChecked
+export const selectAuthStatus = (state)=>state.auth.status
 
 export default userSlice.reducer;

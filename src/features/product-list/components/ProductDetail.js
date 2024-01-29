@@ -3,13 +3,15 @@ import Navbar from "../../navbar/Navbar";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { SelectSingelProduct, featchSingelProductAsync } from "../ProductSlice";
+import { SelectSingelProduct, SelectStatusForProduct, featchSingelProductAsync } from "../ProductSlice";
 import { addToCartAsync, selectCartItem } from "../../cart/CartSlice";
 import { selectLoggedInUser } from "../../auth/AuthSlice";
+import { MoonLoader } from "react-spinners";
 
 function ProductDetail() {
   const CartItems = useSelector(selectCartItem);
   const Product = useSelector(SelectSingelProduct);
+  const status = useSelector(SelectStatusForProduct);
   // // const user = useSelector(selectLoggedInUser);
   const { id } = useParams();
   console.log(Product);
@@ -36,7 +38,7 @@ function ProductDetail() {
       alert("this item already added");
     }
   };
-  if (Product.length != 0)
+  if ( status==="idle" && product)
     return (
       <>
         <div className="sticky top-0 z-50">
@@ -199,7 +201,10 @@ function ProductDetail() {
         </div>
       </>
     );
-  return <div>Hello</div>;
+  else return  <div className="min-h-screen flex items-center justify-center" ><MoonLoader
+  color="#36d7b7"
+  size={100}
+  /></div>;
 }
 
 export default ProductDetail;

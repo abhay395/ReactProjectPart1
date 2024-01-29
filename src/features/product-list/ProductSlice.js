@@ -15,7 +15,7 @@ const initialState = {
   status: "idle",
   brands: [],
   categorys: [],
-  SingelProduct: [],
+  SingelProduct: null,
   totalItems: 0,
 };
 
@@ -146,5 +146,6 @@ export const SelectCategories = (state) => state.product.categorys;
 export const SelectBrands = (state) => state.product.brands;
 export const SelectSingelProduct = (state) => state.product.SingelProduct;
 export const SelectTotalItems = (state) => state.product.totalItems;
+export const SelectStatusForProduct = (state) => state.product.status;
 
 export default ProductSlice.reducer;
